@@ -7,13 +7,16 @@ RUN apt-get -y update
 RUN apt-get -y upgrade
 RUN apt-get install -y ffmpeg
 
+RUN pip install poetry
 WORKDIR /code
+
 COPY ./pyproject.toml /code/pyproject.toml
 COPY ./poetry.lock /code/poetry.lock
+
 RUN pip install --no-cache-dir --upgrade poetry
 RUN pip install httpx
 RUN poetry config virtualenvs.create false
-RUN poetry install --without dev --no-interaction --no-ansi
+RUN poetry install --without dev --no-interaction --no-ansi -vvv
 COPY main.py /code/main.py
 COPY speller_agent.py /code/speller_agent.py
 COPY memory_config.py /code/memory_config.py
