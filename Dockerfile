@@ -1,5 +1,6 @@
 FROM python:3.9-bullseye
-
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
 # get portaudio and ffmpeg
 RUN apt-get update \
         && apt-get install libportaudio2 libportaudiocpp0 portaudio19-dev libasound-dev libsndfile1-dev -y
